@@ -1,1 +1,82 @@
-<p>users-form works!</p>
+<div class="row">
+  <div class="col-md-12">
+
+    <ul *ngIf="errors?.length>0" class="text-danger">
+      <li *ngFor="let error of errors">{{error}}</li>
+    </ul>
+
+    <form (ngSubmit)="onSubmit(formGroup.value)" [formGroup]="formGroup">
+
+      <mat-form-field class="form-element py-3">
+        <mat-label><label for="firstname">Nombres</label></mat-label>
+        <input formControlName="firstname" id="firstname" matInput maxlength="100" minlength="4"
+               placeholder="Ejemplo: Homero"
+               required>
+        <mat-error *ngIf="!formGroup.controls['firstname'].valid && formGroup.controls['firstname'].touched">
+          {{ getErrorFirstname() }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-element py-3">
+        <mat-label><label for="lastname">Apellidos</label></mat-label>
+        <input formControlName="lastname" id="lastname" matInput maxlength="100" minlength="4"
+               placeholder="Ejemplo: Simpsons"
+               required>
+        <mat-error *ngIf="!formGroup.controls['lastname'].valid && formGroup.controls['lastname'].touched">
+          {{ getErrorLastname() }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-element py-3">
+        <mat-label><label for="idNumber">Número de Identificación</label></mat-label>
+        <input formControlName="idNumber" id="idNumber" matInput maxlength="20"
+               placeholder="Ejemplo: 789654123">
+        <mat-error *ngIf="!formGroup.controls['idNumber'].valid && formGroup.controls['idNumber'].touched">
+          {{ getErrorIdNumber() }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-element py-3">
+        <mat-label><label for="phone">Teléfono</label></mat-label>
+        <input formControlName="phone" id="phone" matInput maxlength="10"
+               placeholder="Ejemplo: 789654123">
+        <mat-error *ngIf="!formGroup.controls['phone'].valid && formGroup.controls['phone'].touched">
+          {{ getErrorPhone() }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-element py-3">
+        <mat-label><label for="email">Correo Electrónico</label></mat-label>
+        <input formControlName="email"
+               id="email"
+               matInput
+               maxlength="100"
+               minlength="4"
+               onkeyup="this.value=this.value.toLowerCase()"
+               placeholder="Ejemplo: homero@micorreo.com"
+               required>
+        <mat-error *ngIf="!formGroup.controls['email'].valid && formGroup.controls['email'].touched">
+          {{ getErrorEmail() }}
+        </mat-error>
+      </mat-form-field>
+
+      <input formControlName="id" id="id" type="hidden">
+
+      <div class="form-element py-3">
+        <button *ngIf="!user.id else elseBlock" [disabled]="!formGroup.valid" class="powerstore-fullwidth-button"
+                color="primary" mat-raised-button>
+          Guardar
+        </button>
+        <ng-template #elseBlock>
+          <button [disabled]="!formGroup.valid" class="powerstore-fullwidth-button" color="primary" mat-raised-button>
+            Actualizar
+          </button>
+        </ng-template>
+      </div>
+
+    </form>
+
+    <app-back-button></app-back-button>
+
+  </div>
+</div>

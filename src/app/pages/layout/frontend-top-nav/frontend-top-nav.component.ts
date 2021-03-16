@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {pageInfo} from '../../../core/constants/constants';
 
 @Component({
   selector: 'app-frontend-top-nav',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FrontendTopNavComponent implements OnInit {
 
-  constructor() { }
+  logoSrc = pageInfo.LOGO_SRC;
+  companyName = pageInfo.COMPANY_NAME;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

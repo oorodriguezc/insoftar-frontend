@@ -1,1 +1,15 @@
-<p>frontend-footer works!</p>
+<footer class="footer mt-3 py-3 bg-dark">
+  <div class="container">
+    <div class="text-muted">
+      <small>
+        {{projectName}} {{appVersion}}
+        <br/>
+        Powered By:
+        <a [href]="companyWebpage" target="_blank">
+          <img alt="{{companyName}}" class="d-inline-block align-middle" src="{{logoSrc}}" width="60"/>
+        </a>
+        &copy; {{ currentDate | date : 'yyyy' }}
+      </small>
+    </div>
+  </div>
+</footer>

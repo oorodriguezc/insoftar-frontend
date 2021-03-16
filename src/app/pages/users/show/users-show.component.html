@@ -1,1 +1,38 @@
-<p>users-show works!</p>
+<div class="row">
+  <div class="col-sm">
+
+    <button [routerLink]="['/users/form', user.id]" class="text-success" mat-stroked-button>
+      Editar&nbsp;<em class="fas fa-edit"></em>
+    </button>
+
+    <button (click)="delete(user.id)" color="warn" mat-stroked-button>
+      Eliminar&nbsp;<em class="fas fa-trash-alt"></em>
+    </button>
+
+    <app-back-button></app-back-button>
+
+    <dl>
+      <dt>Nombres:</dt>
+      <dd>{{user.firstname}}</dd>
+      <dt>Apellidos:</dt>
+      <dd>{{user.lastname}}</dd>
+      <dt>Número de identificación:</dt>
+      <dd>{{user.idNumber}}</dd>
+      <dt>Email:</dt>
+      <dd>{{user.email}}</dd>
+      <dt>Teléfono:</dt>
+      <dd>{{user.phone}}</dd>
+    </dl>
+
+    <button [routerLink]="['/users/form', user.id]" class="text-success" mat-stroked-button>
+      Editar&nbsp;<em class="fas fa-edit"></em>
+    </button>
+
+    <button (click)="delete(user.id)" color="warn" mat-stroked-button>
+      Eliminar&nbsp;<em class="fas fa-trash-alt"></em>
+    </button>
+
+    <app-back-button></app-back-button>
+
+  </div>
+</div>

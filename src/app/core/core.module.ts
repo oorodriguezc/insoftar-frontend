@@ -1,12 +1,18 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import { BackButtonComponent } from './components/back-button/back-button.component';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [BackButtonComponent],
+  exports: [
+    BackButtonComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatButtonModule,
   ]
 })
-export class CoreModule { }
+export class CoreModule {
+}

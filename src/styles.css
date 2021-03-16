@@ -1,1 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.form-element {
+  width: 100%;
+}
+
+.insoftar-table-container {
+  max-width: 100%;
+  overflow: auto;
+}
+
+.insoftar-btn-link {
+  text-decoration: none !important;
+  color: #000000;
+}
+
+.infostar-short-text {
+  max-width: 150px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.infostar-text-wrap {
+  float: left;
+  margin: 10px;
+}

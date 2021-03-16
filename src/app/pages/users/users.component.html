@@ -1,1 +1,191 @@
-<p>users works!</p>
+<div class="row">
+  <div class="col-md-12">
+    <section *ngIf="users?.length==0">
+      <h1 class="display-4">Vaya! esto está muy limpio!</h1>
+      <p class="lead">
+        Para crear un nuevo registro es tan simple como hacer clic en el siguiente botón
+      </p>
+      <button [routerLink]="['/users/form']"
+              class="col-md-1 col-sm-12"
+              color="primary"
+              mat-stroked-button>
+        Nuevo&nbsp;<em class="fas fa-plus-square"></em>
+      </button>
+    </section>
+
+    <section *ngIf="users?.length>0">
+      <button [routerLink]="['/users/form']"
+              class="col-md-1 col-sm-12"
+              color="primary"
+              mat-stroked-button>
+        Nuevo&nbsp;<em class="fas fa-plus-square"></em>
+      </button>
+
+      <mat-form-field class="col-md-11 col-sm-12">
+        <mat-label><label for="userFilter">Filtro</label></mat-label>
+        <input #input (keyup)="applyFilter($event)" id="userFilter" matInput placeholder="Ej. Usuario">
+      </mat-form-field>
+
+      <div class="mat-elevation-z8 insoftar-table-container">
+        <table [dataSource]="dataSourceUser" mat-table matSort>
+          <caption></caption>
+
+          <ng-container matColumnDef="id">
+            <th *matHeaderCellDef
+                mat-header-cell
+                mat-sort-header
+                matTooltip="ID"
+                scope="col">
+              <span class="short-text">
+                ID
+              </span>
+            </th>
+            <td *matCellDef="let row"
+                class="insoftar-short-text px-2"
+                mat-cell
+                matTooltip="{{row.id}}">
+              <a [routerLink]="['/users/show', row.id]" class="insoftar-btn-link">
+                {{row.id}}
+              </a>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="firstname">
+            <th *matHeaderCellDef
+                mat-header-cell
+                mat-sort-header
+                matTooltip="Nombres"
+                scope="col">
+              <span class="insoftar-short-text">
+                Nombres
+              </span>
+            </th>
+            <td *matCellDef="let row"
+                class="insoftar-short-text px-2"
+                mat-cell
+                matTooltip="{{row.firstname}}">
+              <a [routerLink]="['/users/show', row.id]" class="insoftar-btn-link">
+                {{row.firstname}}
+              </a>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="lastname">
+            <th *matHeaderCellDef
+                mat-header-cell
+                mat-sort-header
+                matTooltip="Apellidos"
+                scope="col">
+              <span class="insoftar-short-text">
+                Apellidos
+              </span>
+            </th>
+            <td *matCellDef="let row"
+                class="insoftar-short-text px-2"
+                mat-cell
+                matTooltip="{{row.lastname}}">
+              <a [routerLink]="['/users/show', row.id]" class="insoftar-btn-link">
+                {{row.lastname}}
+              </a>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <th *matHeaderCellDef
+                mat-header-cell
+                mat-sort-header
+                matTooltip="Email"
+                scope="col">
+              <span class="insoftar-short-text">
+                Email
+              </span>
+            </th>
+            <td *matCellDef="let row"
+                class="insoftar-short-text px-2"
+                mat-cell
+                matTooltip="{{row.email}}">
+              <a [routerLink]="['/users/show', row.id]" class="insoftar-btn-link">
+                {{row.email}}
+              </a>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="phone">
+            <th *matHeaderCellDef
+                mat-header-cell
+                mat-sort-header
+                matTooltip="Teléfono"
+                scope="col">
+              <span class="insoftar-short-text">
+                Teléfono
+              </span>
+            </th>
+            <td *matCellDef="let row"
+                class="insoftar-short-text px-2"
+                mat-cell
+                matTooltip="{{row.phone}}">
+              <a [routerLink]="['/users/show', row.id]" class="insoftar-btn-link">
+                {{row.phone}}
+              </a>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th *matHeaderCellDef
+                mat-header-cell
+                mat-sort-header
+                matTooltip="Acciones"
+                scope="col">
+              <span class="insoftar-short-text">
+                Acciones
+              </span>
+            </th>
+            <td *matCellDef="let row" class="text-nowrap" mat-cell>
+
+              <button [routerLink]="['/users/show', row.id]"
+                      aria-label="Botón para ver un usuario"
+                      class="text-info"
+                      mat-icon-button
+                      matTooltip="Ver detalles del usuario">
+                <em class="fas fa-eye"></em>
+              </button>
+              <button [routerLink]="['/users/form', row.id]"
+                      aria-label="Botón para editar un usuario"
+                      class="text-success"
+                      mat-icon-button
+                      matTooltip="Editar el usuario">
+                <em class="fas fa-edit"></em>
+              </button>
+              <button (click)="delete(row.id)"
+                      aria-label="Botón para elimnar un usuario"
+                      color="warn"
+                      mat-icon-button
+                      matTooltip="Eliminar el usuario">
+                <em class="fas fa-trash-alt"></em>
+              </button>
+
+            </td>
+          </ng-container>
+
+          <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+          <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+
+          <tr *matNoDataRow class="mat-row">
+            <td class="mat-cell" colspan="4">No hay registros que coincidan con el filtro "{{input.value}}"</td>
+          </tr>
+        </table>
+
+        <mat-paginator
+          (page)="pageEvent = pageNavigations($event)"
+          *ngIf="!loading"
+          [length]="pageLength"
+          [pageIndex]="pageIndex"
+          [pageSizeOptions]="pageSizeOptions"
+          [pageSize]="pageSize">
+        </mat-paginator>
+      </div>
+
+    </section>
+
+  </div>
+</div>
